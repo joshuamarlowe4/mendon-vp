@@ -88,7 +88,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .process-step p{font-size:0.82rem;color:var(--gray);line-height:1.75;}
 .team-bg{background:var(--charcoal);}
 .team-bg .section-label{color:var(--blue-light);}
-.team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3rem;margin-top:4rem;}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem;margin-top:4rem;}
+.team-photo{width:80px;height:80px;border-radius:50%;overflow:hidden;margin-bottom:1.25rem;}
+.team-photo svg{width:100%;height:100%;}
 .team-card{border-top:2px solid var(--blue);padding-top:2rem;}
 .team-name{font-size:1.4rem;font-weight:300;color:var(--white);letter-spacing:-0.01em;margin-bottom:0.3rem;}
 .team-role{font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue-light);font-weight:500;margin-bottom:1.25rem;}
@@ -122,7 +124,7 @@ footer{background:var(--charcoal);padding:3rem;display:flex;align-items:center;j
   .philosophy-blocks{grid-template-columns:1fr;}
   .focus-grid{grid-template-columns:1fr 1fr;}
   .portfolio-grid{grid-template-columns:1fr 1fr;}
-  .team-grid{grid-template-columns:1fr;}
+  .team-grid{grid-template-columns:1fr 1fr;}
   .contact-section{grid-template-columns:1fr;gap:3rem;}
   footer{flex-direction:column;align-items:flex-start;gap:1.5rem;padding:2rem 1.5rem;}
   .report-feed-item{grid-template-columns:1fr;gap:0.5rem;}
@@ -131,7 +133,6 @@ footer{background:var(--charcoal);padding:3rem;display:flex;align-items:center;j
 </style>
 </head>
 <body>
-
 <nav>
   <a href="#" class="nav-logo">
     <svg width="44" height="28" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
@@ -150,7 +151,6 @@ footer{background:var(--charcoal);padding:3rem;display:flex;align-items:center;j
     <li><a href="#contact" class="nav-cta">Get in touch</a></li>
   </ul>
 </nav>
-
 <div style="padding-top:64px;border-bottom:1px solid var(--rule);">
   <div class="hero">
     <div class="hero-label">Fintech &amp; Banktech Venture Capital</div>
@@ -165,13 +165,11 @@ footer{background:var(--charcoal);padding:3rem;display:flex;align-items:center;j
     </div>
   </div>
 </div>
-
 <div class="ticker-strip">
   <div class="ticker-inner">
     <span class="ticker-item">Core Banking<span>—</span></span><span class="ticker-item">Payments Infrastructure<span>—</span></span><span class="ticker-item">Lending Technology<span>—</span></span><span class="ticker-item">RegTech &amp; Compliance<span>—</span></span><span class="ticker-item">Embedded Finance<span>—</span></span><span class="ticker-item">Wealth Management Tech<span>—</span></span><span class="ticker-item">Banking-as-a-Service<span>—</span></span><span class="ticker-item">Financial Data Infrastructure<span>—</span></span><span class="ticker-item">Insurance Technology<span>—</span></span><span class="ticker-item">Core Banking<span>—</span></span><span class="ticker-item">Payments Infrastructure<span>—</span></span><span class="ticker-item">Lending Technology<span>—</span></span><span class="ticker-item">RegTech &amp; Compliance<span>—</span></span><span class="ticker-item">Embedded Finance<span>—</span></span><span class="ticker-item">Wealth Management Tech<span>—</span></span><span class="ticker-item">Banking-as-a-Service<span>—</span></span><span class="ticker-item">Financial Data Infrastructure<span>—</span></span><span class="ticker-item">Insurance Technology<span>—</span></span>
   </div>
 </div>
-
 <section class="section philosophy-bg" id="philosophy">
   <div class="section-inner">
     <div class="section-label">Our philosophy</div>
@@ -184,7 +182,6 @@ footer{background:var(--charcoal);padding:3rem;display:flex;align-items:center;j
     </div>
   </div>
 </section>
-
 <section class="section" id="focus">
   <div class="section-inner">
     <div class="section-label">Focus areas</div>
@@ -201,7 +198,6 @@ footer{background:var(--charcoal);padding:3rem;display:flex;align-items:center;j
     </div>
   </div>
 </section>
-
 <section class="section reports-section" id="reports">
   <div class="section-inner">
     <div class="reports-header-row">
@@ -211,7 +207,6 @@ footer{background:var(--charcoal);padding:3rem;display:flex;align-items:center;j
     <div id="homepage-reports-feed"><div class="reports-empty-state">Reports will appear here once published.</div></div>
   </div>
 </section>
-
 <section class="section" id="portfolio">
   <div class="section-inner">
     <div class="section-label">Selected portfolio</div>
@@ -228,7 +223,6 @@ footer{background:var(--charcoal);padding:3rem;display:flex;align-items:center;j
     </div>
   </div>
 </section>
-
 <section class="section" id="approach" style="background:var(--off-white);">
   <div class="section-inner">
     <div class="section-label">How we work</div>
@@ -244,18 +238,19 @@ footer{background:var(--charcoal);padding:3rem;display:flex;align-items:center;j
     </div>
   </div>
 </section>
-
 <section class="section team-bg" id="team">
   <div class="section-inner">
     <div class="section-label" style="color:var(--blue-light);">The team</div>
-    <h2 class="section-headline" style="color:var(--white);">Operators and investors who've been in the room.</h2>
+    <h2 class="section-headline" style="color:var(--white);">Decades of sector-specific experience and excellence.</h2>
     <div class="team-grid">
-      <div class="team-card"><div class="team-name">Anton Schutz</div><div class="team-role">Managing Partner</div><p class="team-bio">Anton brings over two decades of experience at the intersection of banking and capital markets. His background gives Mendon a distinctive lens on the regulatory, operational, and institutional dynamics that define fintech's most durable opportunities.</p></div>
-      <div class="team-card"><div class="team-name">Andrew Marquardt</div><div class="team-role">Partner</div><p class="team-bio">Andrew focuses on growth-stage fintech and banking technology investments, with a particular emphasis on infrastructure and B2B software. He works closely with portfolio companies on strategy, customer development, and positioning in the institutional market.</p></div>
+      <div class="team-card"><div class="team-photo"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect width="80" height="80" fill="#1D2A3A"/><circle cx="40" cy="30" r="16" fill="#2C6089"/><ellipse cx="40" cy="72" rx="26" ry="18" fill="#2C6089"/></svg></div><div class="team-name">Anton Schutz</div><div class="team-role">Partner</div><p class="team-bio">Anton Schutz is a partner at Mendon Venture Partners.</p></div>
+      <div class="team-card"><div class="team-photo"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect width="80" height="80" fill="#1D2A3A"/><circle cx="40" cy="30" r="16" fill="#2C6089"/><ellipse cx="40" cy="72" rx="26" ry="18" fill="#2C6089"/></svg></div><div class="team-name">Andrew Marquardt</div><div class="team-role">Partner</div><p class="team-bio">Andrew Marquardt is a partner at Mendon Venture Partners.</p></div>
+      <div class="team-card"><div class="team-photo"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect width="80" height="80" fill="#1D2A3A"/><circle cx="40" cy="30" r="16" fill="#2C6089"/><ellipse cx="40" cy="72" rx="26" ry="18" fill="#2C6089"/></svg></div><div class="team-name">Anton Schutz Jr.</div><div class="team-role">Partner</div><p class="team-bio">Anton Schutz Jr. is a partner at Mendon Venture Partners.</p></div>
+      <div class="team-card"><div class="team-photo"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect width="80" height="80" fill="#1D2A3A"/><circle cx="40" cy="30" r="16" fill="#2C6089"/><ellipse cx="40" cy="72" rx="26" ry="18" fill="#2C6089"/></svg></div><div class="team-name">John Clausen</div><div class="team-role">Partner</div><p class="team-bio">John Clausen is a partner at Mendon Venture Partners.</p></div>
+      <div class="team-card"><div class="team-photo"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect width="80" height="80" fill="#1D2A3A"/><circle cx="40" cy="30" r="16" fill="#2C6089"/><ellipse cx="40" cy="72" rx="26" ry="18" fill="#2C6089"/></svg></div><div class="team-name">Dan Goldfarb</div><div class="team-role">Partner</div><p class="team-bio">Dan Goldfarb is a partner at Mendon Venture Partners.</p></div>
     </div>
   </div>
 </section>
-
 <section class="section" id="contact">
   <div class="section-inner contact-section">
     <div>
@@ -276,22 +271,17 @@ footer{background:var(--charcoal);padding:3rem;display:flex;align-items:center;j
     </form>
   </div>
 </section>
-
 <footer>
   <div class="footer-logo-text">Mendon Venture Partners</div>
   <ul class="footer-links"><li><a href="#philosophy">Philosophy</a></li><li><a href="#focus">Focus</a></li><li><a href="reports.html">Reports</a></li><li><a href="#team">Team</a></li><li><a href="#contact">Contact</a></li></ul>
   <span class="footer-copy">&copy; 2025 Mendon Venture Partners</span>
 </footer>
-
-<!-- Firebase -->
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
   import { getFirestore, collection, query, orderBy, limit, getDocs } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
   import { FIREBASE_CONFIG } from './firebase-config.js';
-
   const app = initializeApp(FIREBASE_CONFIG);
   const db = getFirestore(app);
-
   async function loadHomepageReports() {
     const feed = document.getElementById('homepage-reports-feed');
     try {
@@ -312,7 +302,6 @@ footer{background:var(--charcoal);padding:3rem;display:flex;align-items:center;j
   }
   loadHomepageReports();
 </script>
-
 <script>
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';} });
