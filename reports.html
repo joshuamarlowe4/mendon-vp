@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Market Reports — Mendon Venture Partners</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--blue:#3A7EA8;--blue-dark:#2C6089;--blue-light:#7AACCA;--blue-faint:#F4F9FC;--charcoal:#1A1F24;--gray:#6B7280;--gray-light:#9CA3AF;--rule:#E5E8EB;--white:#FFFFFF;--off-white:#F8F9FA;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--white);color:var(--charcoal);-webkit-font-smoothing:antialiased;font-size:16px;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:64px;background:rgba(255,255,255,0.97);border-bottom:1px solid var(--rule);backdrop-filter:blur(8px);}
+.nav-logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;}
+.nav-logo-text .name{font-size:0.8rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--charcoal);display:block;line-height:1;}
+.nav-logo-text .sub{font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray);}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{font-size:0.8rem;color:var(--gray);text-decoration:none;transition:color 0.15s;}
+.nav-links a:hover{color:var(--charcoal);}
+.nav-links a.active{color:var(--blue);font-weight:500;}
+.page-header{padding:8rem 3rem 4rem;border-bottom:1px solid var(--rule);max-width:1200px;margin:0 auto;}
+.page-label{font-size:0.7rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);margin-bottom:1rem;}
+.page-title{font-size:clamp(2.5rem,5vw,4rem);font-weight:300;letter-spacing:-0.025em;color:var(--charcoal);line-height:1.1;margin-bottom:0.75rem;}
+.page-sub{font-size:0.9rem;color:var(--gray);font-weight:300;}
+#list-view{display:block;}
+.list-inner{max-width:1200px;margin:0 auto;padding:0 3rem 6rem;}
+.reports-table{width:100%;border-collapse:collapse;margin-top:3rem;}
+.reports-table thead th{font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);font-weight:500;padding:0 0 1rem;text-align:left;border-bottom:2px solid var(--rule);}
+.reports-table thead th:last-child{text-align:right;}
+.reports-table tbody tr{border-bottom:1px solid var(--rule);cursor:pointer;transition:background 0.12s;}
+.reports-table tbody tr:hover td{background:var(--blue-faint);}
+.reports-table td{padding:1.5rem 1.5rem 1.5rem 0;vertical-align:top;}
+.reports-table td:last-child{text-align:right;white-space:nowrap;}
+.row-date{font-size:0.72rem;color:var(--gray-light);letter-spacing:0.06em;padding-top:0.15rem;white-space:nowrap;}
+.row-title{font-size:1rem;font-weight:500;color:var(--charcoal);margin-bottom:0.35rem;line-height:1.3;}
+.row-tldr{font-size:0.8rem;color:var(--gray);line-height:1.6;max-width:600px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.row-arrow{font-size:0.8rem;color:var(--blue);opacity:0.4;}
+.reports-table tbody tr:hover .row-arrow{opacity:1;}
+.no-reports{padding:5rem 0;text-align:center;color:var(--gray-light);font-size:0.875rem;border-top:1px solid var(--rule);}
+#detail-view{display:none;}
+.detail-nav{max-width:1200px;margin:0 auto;padding:2rem 3rem 0;}
+.back-btn{display:inline-flex;align-items:center;gap:0.5rem;background:none;border:none;font-family:'Inter',sans-serif;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);cursor:pointer;padding:0;transition:gap 0.15s;}
+.back-btn:hover{gap:0.75rem;}
+.detail-inner{max-width:780px;margin:0 auto;padding:3rem 3rem 7rem;}
+.detail-date{font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--blue);font-weight:500;margin-bottom:1.25rem;}
+.detail-title{font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:300;letter-spacing:-0.02em;color:var(--charcoal);line-height:1.18;margin-bottom:3rem;}
+.detail-rule{border:none;border-top:2px solid var(--blue);margin-bottom:2.5rem;width:48px;}
+.report-block{margin-bottom:3rem;}
+.report-block-label{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);font-weight:500;margin-bottom:1rem;display:flex;align-items:center;gap:1rem;}
+.report-block-label::after{content:'';flex:1;height:1px;background:var(--rule);}
+.report-block-body{font-size:0.9rem;color:var(--gray);line-height:1.9;white-space:pre-wrap;}
+.deals-wrap{overflow-x:auto;margin-top:0.75rem;}
+.deals-tbl{width:100%;border-collapse:collapse;font-size:0.82rem;}
+.deals-tbl th{font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--charcoal);background:var(--off-white);padding:0.65rem 1rem;text-align:left;font-weight:500;border-bottom:1px solid var(--rule);}
+.deals-tbl td{padding:0.75rem 1rem;border-bottom:1px solid var(--rule);color:var(--gray);vertical-align:top;}
+.deals-tbl tr:last-child td{border-bottom:none;}
+.deals-tbl td:first-child{font-weight:500;color:var(--charcoal);}
+.my-take-box{background:var(--charcoal);border-left:3px solid var(--blue);padding:2rem 2rem 2rem 2.25rem;margin-top:0.75rem;}
+.my-take-box p{font-size:0.9rem;color:rgba(255,255,255,0.65);line-height:1.9;white-space:pre-wrap;font-style:italic;font-weight:300;}
+footer{background:var(--charcoal);padding:2.5rem 3rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;}
+.footer-logo-text{font-size:0.75rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);}
+.footer-links{display:flex;gap:1.75rem;list-style:none;}
+.footer-links a{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.25);text-decoration:none;transition:color 0.15s;}
+.footer-links a:hover{color:rgba(255,255,255,0.7);}
+.footer-copy{font-size:0.68rem;color:rgba(255,255,255,0.2);}
+@media(max-width:768px){nav,.page-header{padding-left:1.5rem;padding-right:1.5rem;}.list-inner,.detail-nav,.detail-inner{padding-left:1.5rem;padding-right:1.5rem;}footer{flex-direction:column;align-items:flex-start;padding:2rem 1.5rem;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="mendon-venture-partners.html" class="nav-logo">
+    <svg width="40" height="28" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg"><text x="2" y="60" font-family="Inter,sans-serif" font-size="68" font-weight="700" fill="#3A7EA8">M</text><text x="42" y="60" font-family="Inter,sans-serif" font-size="68" font-weight="700" fill="#7AACCA">V</text><text x="80" y="60" font-family="Inter,sans-serif" font-size="68" font-weight="700" fill="#3A7EA8">P</text></svg>
+    <div class="nav-logo-text"><span class="name">Mendon</span><span class="sub">Venture Partners</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="mendon-venture-partners.html#philosophy">Philosophy</a></li>
+    <li><a href="mendon-venture-partners.html#focus">Focus</a></li>
+    <li><a href="mendon-venture-partners.html#portfolio">Portfolio</a></li>
+    <li><a href="reports.html" class="active">Reports</a></li>
+    <li><a href="mendon-venture-partners.html#team">Team</a></li>
+    <li><a href="mendon-venture-partners.html#contact" style="background:var(--blue);color:var(--white)!important;padding:0.45rem 1.1rem;font-size:0.75rem;font-weight:500;">Get in touch</a></li>
+  </ul>
+</nav>
+
+<div style="padding-top:64px;">
+  <div class="page-header">
+    <div class="page-label">Fintech &amp; Banktech Intelligence</div>
+    <h1 class="page-title">Daily Market Reports</h1>
+    <p class="page-sub">Published each morning by the Mendon Venture Partners research team.</p>
+  </div>
+</div>
+
+<div id="list-view">
+  <div class="list-inner" id="list-container">
+    <p class="no-reports" style="border-top:none;padding-top:3rem;">Loading reports...</p>
+  </div>
+</div>
+
+<div id="detail-view">
+  <div class="detail-nav"><button class="back-btn" id="back-btn">← All reports</button></div>
+  <div class="detail-inner" id="detail-content"></div>
+</div>
+
+<footer>
+  <div class="footer-logo-text">Mendon Venture Partners</div>
+  <ul class="footer-links"><li><a href="mendon-venture-partners.html#philosophy">Philosophy</a></li><li><a href="mendon-venture-partners.html#focus">Focus</a></li><li><a href="reports.html">Reports</a></li><li><a href="mendon-venture-partners.html#team">Team</a></li><li><a href="mendon-venture-partners.html#contact">Contact</a></li></ul>
+  <span class="footer-copy">&copy; 2025 Mendon Venture Partners</span>
+</footer>
+
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getFirestore, collection, query, orderBy, getDocs, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+  import { FIREBASE_CONFIG } from './firebase-config.js';
+
+  const app = initializeApp(FIREBASE_CONFIG);
+  const db = getFirestore(app);
+  let allReports = [];
+
+  function formatDeals(text) {
+    if (!text || !text.trim()) return '<p style="font-size:0.85rem;color:var(--gray-light);">No deals data for this period.</p>';
+    const lines = text.trim().split('\n').filter(l => l.trim());
+    if (lines.length < 2) return `<p style="font-size:0.85rem;color:var(--gray);">${text}</p>`;
+    const rows = lines.map(l => l.split('|').map(c => c.trim()).filter(Boolean));
+    const hdr = rows[0], body = rows.slice(1);
+    return `<div class="deals-wrap"><table class="deals-tbl"><thead><tr>${hdr.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${body.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  }
+
+  function showDetail(report) {
+    document.getElementById('list-view').style.display = 'none';
+    document.getElementById('detail-view').style.display = 'block';
+    window.scrollTo(0, 0);
+    document.getElementById('detail-content').innerHTML = `
+      <div class="detail-date">${report.date}</div>
+      <h1 class="detail-title">${report.title}</h1>
+      <hr class="detail-rule"/>
+      <div class="report-block"><div class="report-block-label">TLDR</div><div class="report-block-body">${report.tldr}</div></div>
+      <div class="report-block"><div class="report-block-label">In Depth</div><div class="report-block-body">${report.inDepth}</div></div>
+      <div class="report-block"><div class="report-block-label">Deals &amp; Funding</div>${formatDeals(report.deals)}</div>
+      <div class="report-block"><div class="report-block-label">My Take</div><div class="my-take-box"><p>${report.myTake}</p></div></div>`;
+  }
+
+  function showList() {
+    document.getElementById('detail-view').style.display = 'none';
+    document.getElementById('list-view').style.display = 'block';
+    window.scrollTo(0, 0);
+  }
+
+  document.getElementById('back-btn').addEventListener('click', showList);
+
+  function renderList(reports) {
+    const c = document.getElementById('list-container');
+    if (!reports || reports.length === 0) { c.innerHTML = '<p class="no-reports">No reports published yet.</p>'; return; }
+    c.innerHTML = `<table class="reports-table">
+      <thead><tr><th>Date</th><th>Report</th><th></th></tr></thead>
+      <tbody>${reports.map(r => `<tr data-id="${r.id}">
+        <td><div class="row-date">${r.date}</div></td>
+        <td><div class="row-title">${r.title}</div><div class="row-tldr">${(r.tldr||'').replace(/•/g,'').split('\n')[0]||''}</div></td>
+        <td><span class="row-arrow">→</span></td>
+      </tr>`).join('')}</tbody></table>`;
+    c.querySelectorAll('tbody tr').forEach(row => {
+      row.addEventListener('click', () => {
+        const r = allReports.find(x => x.id === row.dataset.id);
+        if (r) showDetail(r);
+      });
+    });
+  }
+
+  async function loadReports() {
+    try {
+      const q = query(collection(db, 'reports'), orderBy('publishedAt', 'desc'));
+      const snap = await getDocs(q);
+      allReports = snap.docs.map(d => d.data());
+      renderList(allReports);
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      if (id) { const r = allReports.find(x => x.id === id); if (r) showDetail(r); }
+    } catch(e) { renderList([]); console.error(e); }
+  }
+  loadReports();
+</script>
+</body>
+</html>

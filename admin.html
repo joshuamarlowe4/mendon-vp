@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin — Mendon Venture Partners</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--blue:#3A7EA8;--blue-dark:#2C6089;--blue-light:#7AACCA;--charcoal:#1A1F24;--gray:#6B7280;--gray-light:#9CA3AF;--rule:#E5E8EB;--white:#FFFFFF;--off-white:#F8F9FA;--surface:#0F1923;--surface-2:#162130;--surface-3:#1D2A3A;--green:#2D6A4F;--red-text:#e57373;}
+html{height:100%;}
+body{font-family:'Inter',sans-serif;background:var(--surface);color:#E5E8EB;-webkit-font-smoothing:antialiased;font-size:14px;min-height:100vh;}
+#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;}
+.login-box{background:var(--surface-2);border:1px solid rgba(58,126,168,0.2);padding:3rem;width:380px;}
+.login-brand{display:flex;align-items:center;gap:0.75rem;margin-bottom:2.5rem;}
+.login-brand-text .name{font-size:0.85rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#E5E8EB;display:block;line-height:1;}
+.login-brand-text .sub{font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray);}
+.login-badge{font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;background:rgba(58,126,168,0.15);color:var(--blue-light);padding:0.2rem 0.55rem;border:1px solid rgba(58,126,168,0.25);align-self:flex-start;margin-top:2px;}
+.l-label{font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gray);margin-bottom:0.5rem;display:block;}
+.l-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:0.75rem 1rem;color:#E5E8EB;font-family:'Inter',sans-serif;font-size:0.875rem;outline:none;transition:border-color 0.15s;margin-bottom:1.25rem;}
+.l-input:focus{border-color:var(--blue);}
+.l-btn{width:100%;background:var(--blue);color:var(--white);border:none;padding:0.85rem;font-family:'Inter',sans-serif;font-size:0.75rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;transition:background 0.15s;}
+.l-btn:hover{background:var(--blue-dark);}
+.l-error{font-size:0.78rem;color:var(--red-text);margin-top:0.75rem;display:none;}
+#admin-shell{display:none;min-height:100vh;}
+.admin-nav{background:var(--surface-2);border-bottom:1px solid rgba(255,255,255,0.06);padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.admin-brand-nav{font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#E5E8EB;}
+.admin-brand-nav span{color:var(--blue-light);}
+.admin-badge-nav{font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;background:rgba(58,126,168,0.15);color:var(--blue-light);padding:0.18rem 0.5rem;border:1px solid rgba(58,126,168,0.25);}
+.tabs{display:flex;}
+.tab-btn{background:none;border:none;border-bottom:2px solid transparent;padding:0 1.25rem;height:56px;font-family:'Inter',sans-serif;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(229,232,235,0.4);cursor:pointer;transition:color 0.15s,border-color 0.15s;}
+.tab-btn.active{color:var(--blue-light);border-bottom-color:var(--blue);}
+.tab-btn:hover:not(.active){color:rgba(229,232,235,0.7);}
+.logout-btn{background:none;border:1px solid rgba(255,255,255,0.1);padding:0.35rem 0.85rem;color:rgba(229,232,235,0.3);font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:all 0.15s;}
+.logout-btn:hover{color:#E5E8EB;border-color:rgba(255,255,255,0.3);}
+.tab-panel{display:none;padding:2rem;max-width:960px;margin:0 auto;}
+.tab-panel.active{display:block;}
+.panel-header{margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,0.06);}
+.panel-header h2{font-size:1.2rem;font-weight:300;color:#E5E8EB;letter-spacing:-0.01em;margin-bottom:0.25rem;}
+.panel-header p{font-size:0.8rem;color:var(--gray);font-weight:300;}
+.fl{display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.1rem;}
+.fl label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue-light);font-weight:500;}
+.fi,.ft{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:0.65rem 0.875rem;color:#E5E8EB;font-family:'Inter',sans-serif;font-size:0.85rem;outline:none;transition:border-color 0.15s;width:100%;resize:vertical;}
+.fi:focus,.ft:focus{border-color:var(--blue);}
+.ft{min-height:110px;line-height:1.65;}
+.ft.tall{min-height:160px;}
+.rule{border:none;border-top:1px solid rgba(255,255,255,0.06);margin:1.75rem 0;}
+.hl-headers{display:grid;grid-template-columns:1fr 1fr 28px;gap:0.5rem;margin-bottom:0.4rem;}
+.hl-col-label{font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(229,232,235,0.25);}
+.hl-row{display:grid;grid-template-columns:1fr 1fr 28px;gap:0.5rem;margin-bottom:0.5rem;align-items:start;}
+.hl-row input,.hl-row textarea{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:0.55rem 0.75rem;color:#E5E8EB;font-family:'Inter',sans-serif;font-size:0.82rem;outline:none;transition:border-color 0.15s;width:100%;resize:none;}
+.hl-row input:focus,.hl-row textarea:focus{border-color:var(--blue);}
+.hl-row textarea{min-height:56px;}
+.hl-remove{background:rgba(155,35,53,0.1);border:1px solid rgba(155,35,53,0.2);color:rgba(229,232,235,0.3);width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;transition:all 0.15s;margin-top:2px;}
+.hl-remove:hover{background:rgba(155,35,53,0.25);color:var(--red-text);}
+.add-hl-btn{background:none;border:1px dashed rgba(255,255,255,0.1);padding:0.5rem;color:rgba(229,232,235,0.3);font-family:'Inter',sans-serif;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;width:100%;transition:all 0.15s;margin-bottom:1.25rem;}
+.add-hl-btn:hover{border-color:var(--blue);color:var(--blue-light);}
+.btn{border:none;padding:0.7rem 1.5rem;font-family:'Inter',sans-serif;font-size:0.7rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;transition:all 0.15s;}
+.btn-blue{background:var(--blue);color:var(--white);}
+.btn-blue:hover{background:var(--blue-dark);}
+.btn-blue:disabled{background:rgba(58,126,168,0.3);color:rgba(255,255,255,0.35);cursor:not-allowed;}
+.btn-ghost{background:rgba(255,255,255,0.05);color:rgba(229,232,235,0.5);border:1px solid rgba(255,255,255,0.08);}
+.btn-ghost:hover{background:rgba(255,255,255,0.08);color:#E5E8EB;}
+.btn-green{background:var(--green);color:var(--white);}
+.btn-green:hover{background:#3a8a65;}
+.btn-green:disabled{background:rgba(45,106,79,0.3);cursor:not-allowed;}
+.action-row{display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:1.25rem;}
+.gen-status{font-size:0.75rem;color:rgba(229,232,235,0.3);}
+.draft-label-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem;}
+.draft-label-row label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue-light);font-weight:500;}
+.draft-hint-inline{font-size:0.68rem;color:rgba(229,232,235,0.2);}
+.deals-hint{font-size:0.68rem;color:rgba(229,232,235,0.2);margin-top:0.3rem;font-style:italic;}
+.spin{display:inline-block;width:13px;height:13px;border:2px solid rgba(255,255,255,0.15);border-top-color:var(--white);border-radius:50%;animation:sp 0.6s linear infinite;vertical-align:middle;margin-right:0.5rem;}
+@keyframes sp{to{transform:rotate(360deg);}}
+.pub-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;}
+.pub-meta h2{font-size:1.2rem;font-weight:300;color:#E5E8EB;}
+.pub-meta p{font-size:0.78rem;color:var(--gray);}
+.pub-view-link{font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue-light);text-decoration:none;border-bottom:1px solid rgba(58,126,168,0.3);padding-bottom:0.15rem;}
+.pub-list{display:flex;flex-direction:column;gap:0.5rem;}
+.pub-item{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);padding:1.1rem 1.5rem;display:grid;grid-template-columns:90px 1fr auto;gap:1.5rem;align-items:center;transition:background 0.12s;}
+.pub-item:hover{background:rgba(255,255,255,0.05);}
+.pub-date{font-size:0.68rem;letter-spacing:0.08em;color:var(--blue-light);}
+.pub-title{font-size:0.9rem;color:#E5E8EB;}
+.pub-actions{display:flex;gap:0.5rem;}
+.pub-action-btn{background:none;border:1px solid rgba(255,255,255,0.1);padding:0.28rem 0.7rem;color:rgba(229,232,235,0.4);font-family:'Inter',sans-serif;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all 0.15s;text-decoration:none;display:inline-block;}
+.pub-action-btn:hover{color:#E5E8EB;border-color:rgba(255,255,255,0.3);}
+.pub-action-btn.del:hover{color:var(--red-text);border-color:rgba(155,35,53,0.4);}
+.empty-state{padding:3rem 0;text-align:center;color:rgba(229,232,235,0.2);font-size:0.85rem;}
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--surface-3);border:1px solid rgba(58,126,168,0.3);padding:0.75rem 1.25rem;font-size:0.78rem;color:#E5E8EB;display:none;z-index:999;max-width:340px;}
+.toast.success{border-color:rgba(45,106,79,0.5);background:rgba(45,106,79,0.15);}
+.toast.error{border-color:rgba(155,35,53,0.5);background:rgba(155,35,53,0.12);color:var(--red-text);}
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-brand">
+      <svg width="42" height="28" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg"><text x="2" y="60" font-family="Inter,sans-serif" font-size="68" font-weight="700" fill="#3A7EA8">M</text><text x="42" y="60" font-family="Inter,sans-serif" font-size="68" font-weight="700" fill="#7AACCA">V</text><text x="80" y="60" font-family="Inter,sans-serif" font-size="68" font-weight="700" fill="#3A7EA8">P</text></svg>
+      <div class="login-brand-text"><span class="name">Mendon VP</span><span class="sub">Venture Partners</span></div>
+      <div class="login-badge">Admin</div>
+    </div>
+    <label class="l-label" for="pw">Password</label>
+    <input class="l-input" type="password" id="pw" placeholder="Enter admin password" autocomplete="current-password"/>
+    <button class="l-btn" id="login-btn">Sign in</button>
+    <div class="l-error" id="l-error">Incorrect password.</div>
+  </div>
+</div>
+
+<div id="admin-shell">
+  <nav class="admin-nav">
+    <div style="display:flex;align-items:center;gap:1.25rem;">
+      <div class="admin-brand-nav">Mendon <span>VP</span></div>
+      <div class="admin-badge-nav">Admin</div>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="compose">Compose</button>
+      <button class="tab-btn" data-tab="published">Published</button>
+    </div>
+    <button class="logout-btn" id="logout-btn">Log out</button>
+  </nav>
+
+  <div class="tab-panel active" id="tab-compose">
+    <div class="panel-header"><h2>New Market Brief</h2><p>Enter headlines and context, generate an AI draft, edit, then publish to the site.</p></div>
+    <div class="fl"><label>Report title</label><input class="fi" type="text" id="report-title" placeholder="e.g. Fintech Daily Brief — June 22, 2025"/></div>
+    <hr class="rule"/>
+    <div class="fl" style="margin-bottom:0.75rem;"><label>Headlines &amp; notes <span style="font-size:0.58rem;color:rgba(229,232,235,0.25);font-weight:400;letter-spacing:0;text-transform:none;margin-left:0.5rem;">— one story per row</span></label></div>
+    <div class="hl-headers"><div class="hl-col-label">Headline</div><div class="hl-col-label">Context / notes</div><div></div></div>
+    <div id="hl-container"></div>
+    <button class="add-hl-btn" id="add-hl">+ Add headline</button>
+    <div class="action-row" style="margin-top:0;">
+      <button class="btn btn-blue" id="draft-btn">Generate draft with AI</button>
+      <span class="gen-status" id="gen-status"></span>
+    </div>
+    <hr class="rule"/>
+    <div style="margin-bottom:1.1rem;"><div class="draft-label-row"><label>TLDR</label></div><textarea class="ft tall" id="f-tldr" placeholder="5 bullet-point headlines will generate here..."></textarea></div>
+    <div style="margin-bottom:1.1rem;"><div class="draft-label-row"><label>In Depth</label></div><textarea class="ft" style="min-height:200px;" id="f-indepth" placeholder="Expanded analysis with 'Why It Matters' framing..."></textarea></div>
+    <div style="margin-bottom:1.1rem;">
+      <div class="draft-label-row"><label>Deals &amp; Funding</label><span class="draft-hint-inline">Company | Amount | Stage | Category</span></div>
+      <textarea class="ft" id="f-deals" placeholder="Company | Amount | Stage | Category&#10;Ramp | $150M | Series F | Expense Management"></textarea>
+      <div class="deals-hint">Use | to separate columns. First row = headers.</div>
+    </div>
+    <div style="margin-bottom:1.1rem;"><div class="draft-label-row"><label>My Take</label></div><textarea class="ft tall" id="f-mytake" placeholder="Your first-person editorial take..."></textarea></div>
+    <div class="action-row">
+      <button class="btn btn-green" id="publish-btn">Publish report</button>
+      <button class="btn btn-ghost" id="clear-btn">Clear</button>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-published">
+    <div class="pub-meta">
+      <div><h2>Published Reports</h2><p id="pub-count"></p></div>
+      <a href="reports.html" target="_blank" class="pub-view-link">View public page →</a>
+    </div>
+    <div id="pub-list" class="pub-list"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getFirestore, collection, doc, setDoc, deleteDoc, getDocs, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+  import { FIREBASE_CONFIG } from './firebase-config.js';
+
+  const PW = 'mendon2025';
+  const app = initializeApp(FIREBASE_CONFIG);
+  const db = getFirestore(app);
+
+  // AUTH
+  if (sessionStorage.getItem('mvp_admin') === '1') {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-shell').style.display = 'block';
+    initAdmin();
+  }
+
+  document.getElementById('login-btn').addEventListener('click', tryLogin);
+  document.getElementById('pw').addEventListener('keydown', e => { if(e.key==='Enter') tryLogin(); });
+
+  function tryLogin() {
+    if (document.getElementById('pw').value === PW) {
+      sessionStorage.setItem('mvp_admin', '1');
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('admin-shell').style.display = 'block';
+      initAdmin();
+    } else {
+      document.getElementById('l-error').style.display = 'block';
+      document.getElementById('pw').value = '';
+    }
+  }
+
+  document.getElementById('logout-btn').addEventListener('click', () => {
+    sessionStorage.removeItem('mvp_admin');
+    document.getElementById('admin-shell').style.display = 'none';
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('pw').value = '';
+  });
+
+  // TABS
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+      if (btn.dataset.tab === 'published') loadPublished();
+    });
+  });
+
+  // HEADLINES
+  let hlCount = 0;
+  function addHL(h='', n='') {
+    hlCount++;
+    const c = document.getElementById('hl-container');
+    const row = document.createElement('div');
+    row.className = 'hl-row';
+    row.innerHTML = `<input type="text" placeholder="Headline ${hlCount}" value="${h.replace(/"/g,'&quot;')}" class="hl-h"/>
+      <textarea class="hl-n" placeholder="Context or notes...">${n}</textarea>
+      <button class="hl-remove" title="Remove">×</button>`;
+    row.querySelector('.hl-remove').addEventListener('click', () => row.remove());
+    c.appendChild(row);
+  }
+  document.getElementById('add-hl').addEventListener('click', () => addHL());
+  function getHLs() {
+    return Array.from(document.querySelectorAll('.hl-row')).map(r => ({
+      h: r.querySelector('.hl-h').value.trim(),
+      n: r.querySelector('.hl-n').value.trim()
+    })).filter(x => x.h);
+  }
+
+  // GENERATE
+  document.getElementById('draft-btn').addEventListener('click', generateDraft);
+  async function generateDraft() {
+    const hls = getHLs();
+    if (!hls.length) { toast('Add at least one headline first.', 'error'); return; }
+    const btn = document.getElementById('draft-btn');
+    btn.disabled = true; btn.innerHTML = '<span class="spin"></span>Generating...';
+    const hlText = hls.map((x,i) => `${i+1}. ${x.h}${x.n ? '\n   Context: '+x.n : ''}`).join('\n\n');
+    const prompt = `You are a fintech and banktech analyst at Mendon Venture Partners. Write a daily market brief from these headlines.
+
+Return ONLY a JSON object with these exact keys (no markdown fences):
+{
+  "tldr": "5 bullet points with • character, each 1-2 sentences, market-reaction-focused",
+  "inDepth": "200-300 words expanding on the 1-2 most important stories. Include 'Why It Matters:' paragraph. Use editorial language (hawkish/dovish, structural/cyclical).",
+  "myTake": "100-150 words first-person take using 'I'. Specific, analytical, clear point of view for fintech/banktech founders and investors."
+}
+
+HEADLINES:
+${hlText}
+
+Return ONLY the JSON.`;
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,messages:[{role:'user',content:prompt}]})
+      });
+      const data = await res.json();
+      const text = data.content.map(c=>c.text||'').join('').trim().replace(/```json|```/g,'').trim();
+      let parsed;
+      try { parsed = JSON.parse(text); } catch(e) { toast('Could not parse response. Try again.','error'); btn.disabled=false; btn.textContent='Generate draft with AI'; return; }
+      if (parsed.tldr) document.getElementById('f-tldr').value = parsed.tldr;
+      if (parsed.inDepth) document.getElementById('f-indepth').value = parsed.inDepth;
+      if (parsed.myTake) document.getElementById('f-mytake').value = parsed.myTake;
+      if (!document.getElementById('report-title').value) {
+        const d = new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+        document.getElementById('report-title').value = `Fintech Daily Brief — ${d}`;
+      }
+      toast('Draft generated. Review and edit before publishing.', 'success');
+      document.getElementById('f-tldr').scrollIntoView({behavior:'smooth',block:'start'});
+    } catch(e) { toast('Network error. Try again.', 'error'); }
+    btn.disabled = false; btn.textContent = 'Generate draft with AI';
+  }
+
+  // PUBLISH
+  document.getElementById('publish-btn').addEventListener('click', publishReport);
+  async function publishReport() {
+    const title = document.getElementById('report-title').value.trim();
+    const tldr = document.getElementById('f-tldr').value.trim();
+    if (!title) { toast('Please enter a report title.', 'error'); return; }
+    if (!tldr) { toast('TLDR section is required.', 'error'); return; }
+    const btn = document.getElementById('publish-btn');
+    btn.disabled = true; btn.textContent = 'Publishing...';
+    const now = new Date();
+    const id = 'rpt_' + now.getTime();
+    const report = {
+      id, title,
+      date: now.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),
+      tldr,
+      inDepth: document.getElementById('f-indepth').value.trim(),
+      deals: document.getElementById('f-deals').value.trim(),
+      myTake: document.getElementById('f-mytake').value.trim(),
+      publishedAt: now.toISOString()
+    };
+    try {
+      await setDoc(doc(db, 'reports', id), report);
+      toast(`"${title}" published.`, 'success');
+      clearForm();
+      setTimeout(() => document.querySelector('[data-tab="published"]').click(), 1200);
+    } catch(e) { toast('Firestore error: ' + e.message, 'error'); }
+    btn.disabled = false; btn.textContent = 'Publish report';
+  }
+
+  document.getElementById('clear-btn').addEventListener('click', () => { if(confirm('Clear form?')) clearForm(); });
+  function clearForm() {
+    ['report-title','f-tldr','f-indepth','f-deals','f-mytake'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('hl-container').innerHTML = ''; hlCount = 0;
+  }
+
+  // PUBLISHED LIST
+  async function loadPublished() {
+    const list = document.getElementById('pub-list');
+    const countEl = document.getElementById('pub-count');
+    list.innerHTML = '<div class="empty-state">Loading...</div>';
+    try {
+      const q = query(collection(db, 'reports'), orderBy('publishedAt', 'desc'));
+      const snap = await getDocs(q);
+      countEl.textContent = `${snap.size} report${snap.size !== 1 ? 's' : ''} published`;
+      if (snap.empty) { list.innerHTML = '<div class="empty-state">No reports published yet.</div>'; return; }
+      list.innerHTML = snap.docs.map(d => {
+        const r = d.data();
+        return `<div class="pub-item">
+          <div class="pub-date">${r.date}</div>
+          <div class="pub-title">${r.title}</div>
+          <div class="pub-actions">
+            <button class="pub-action-btn" data-edit="${r.id}">Edit</button>
+            <a class="pub-action-btn" href="reports.html?id=${r.id}" target="_blank">View</a>
+            <button class="pub-action-btn del" data-delete="${r.id}">Delete</button>
+          </div>
+        </div>`;
+      }).join('');
+
+      list.querySelectorAll('[data-delete]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          if (!confirm('Delete this report?')) return;
+          btn.textContent = '...';
+          try { await deleteDoc(doc(db,'reports',btn.dataset.delete)); toast('Deleted.','success'); loadPublished(); }
+          catch(e) { toast('Delete failed.','error'); }
+        });
+      });
+
+      list.querySelectorAll('[data-edit]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const id = btn.dataset.edit;
+          const snap2 = await getDocs(query(collection(db,'reports')));
+          const r = snap2.docs.find(d=>d.id===id)?.data();
+          if (!r) { toast('Could not load.','error'); return; }
+          document.getElementById('report-title').value = r.title||'';
+          document.getElementById('f-tldr').value = r.tldr||'';
+          document.getElementById('f-indepth').value = r.inDepth||'';
+          document.getElementById('f-deals').value = r.deals||'';
+          document.getElementById('f-mytake').value = r.myTake||'';
+          document.getElementById('hl-container').innerHTML = ''; hlCount = 0;
+          document.querySelector('[data-tab="compose"]').click();
+          toast('Loaded for editing. Re-publish to update.','success');
+        });
+      });
+    } catch(e) { list.innerHTML = '<div class="empty-state">Error: ' + e.message + '</div>'; }
+  }
+
+  // TOAST
+  let toastTimer;
+  function toast(msg, type='') {
+    const el = document.getElementById('toast');
+    el.textContent = msg; el.className = 'toast' + (type ? ' '+type : ''); el.style.display = 'block';
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => el.style.display='none', 4000);
+  }
+
+  window.toast = toast;
+
+  function initAdmin() { addHL(); addHL(); addHL(); }
+</script>
+</body>
+</html>
