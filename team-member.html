@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Team — Mendon Venture Partners</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--blue:#3A7EA8;--blue-dark:#2C6089;--blue-light:#7AACCA;--blue-faint:#F4F9FC;--charcoal:#1A1F24;--gray:#6B7280;--gray-light:#9CA3AF;--rule:#E5E8EB;--white:#FFFFFF;--off-white:#F8F9FA;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--white);color:var(--charcoal);-webkit-font-smoothing:antialiased;font-size:16px;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:64px;background:rgba(255,255,255,0.97);border-bottom:1px solid var(--rule);backdrop-filter:blur(8px);}
+.nav-logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;}
+.nav-logo-text .name{font-size:0.8rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--charcoal);display:block;line-height:1;}
+.nav-logo-text .sub{font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray);}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{font-size:0.8rem;color:var(--gray);text-decoration:none;transition:color 0.15s;}
+.nav-links a:hover{color:var(--charcoal);}
+
+/* BACK */
+.back-bar{max-width:1200px;margin:0 auto;padding:2rem 3rem 0;}
+.back-btn{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);text-decoration:none;transition:gap 0.15s;}
+.back-btn:hover{gap:0.75rem;}
+
+/* PROFILE HERO */
+.profile-hero{background:var(--charcoal);padding:6rem 3rem 5rem;margin-top:64px;}
+.profile-hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:3.5rem;align-items:end;}
+.profile-photo{width:120px;height:120px;border-radius:50%;overflow:hidden;border:3px solid var(--blue);flex-shrink:0;}
+.profile-photo svg{width:100%;height:100%;}
+.profile-label{font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue-light);font-weight:500;margin-bottom:0.75rem;}
+.profile-name{font-size:clamp(2rem,4vw,3.2rem);font-weight:300;color:var(--white);letter-spacing:-0.02em;line-height:1.1;margin-bottom:0.5rem;}
+.profile-role{font-size:0.75rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.4);font-weight:400;}
+
+/* LINKEDIN BUTTON */
+.linkedin-btn{display:inline-flex;align-items:center;gap:0.6rem;background:var(--blue);color:var(--white);text-decoration:none;padding:0.65rem 1.25rem;font-size:0.75rem;font-weight:500;letter-spacing:0.08em;transition:background 0.15s;margin-top:1.5rem;}
+.linkedin-btn:hover{background:var(--blue-dark);}
+.linkedin-btn svg{width:16px;height:16px;fill:var(--white);flex-shrink:0;}
+
+/* CONTENT */
+.profile-content{max-width:1200px;margin:0 auto;padding:5rem 3rem 7rem;display:grid;grid-template-columns:2fr 1fr;gap:6rem;align-items:start;}
+
+.profile-section{margin-bottom:3.5rem;}
+.profile-section:last-child{margin-bottom:0;}
+.profile-section-label{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);font-weight:500;margin-bottom:1.25rem;display:flex;align-items:center;gap:1rem;}
+.profile-section-label::after{content:'';flex:1;height:1px;background:var(--rule);}
+.profile-section-body{font-size:0.92rem;color:var(--gray);line-height:1.9;font-weight:300;}
+.placeholder-block{background:var(--off-white);border:1px dashed var(--rule);padding:1.5rem;border-radius:0;}
+.placeholder-block p{font-size:0.82rem;color:var(--gray-light);font-style:italic;}
+
+/* SIDEBAR */
+.profile-sidebar{}
+.sidebar-card{background:var(--off-white);border:1px solid var(--rule);padding:1.75rem;margin-bottom:1.5rem;}
+.sidebar-card-label{font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);font-weight:500;margin-bottom:1rem;}
+.sidebar-card p{font-size:0.82rem;color:var(--gray);line-height:1.75;}
+.sidebar-card p.placeholder{font-style:italic;color:var(--gray-light);}
+
+/* OTHER PARTNERS */
+.other-partners{background:var(--charcoal);padding:5rem 3rem;}
+.other-inner{max-width:1200px;margin:0 auto;}
+.other-label{font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue-light);font-weight:500;margin-bottom:2.5rem;}
+.other-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);}
+.other-card{background:var(--charcoal);padding:1.75rem;text-decoration:none;display:block;transition:background 0.15s;border-top:2px solid transparent;}
+.other-card:hover{background:#1D2A3A;border-top-color:var(--blue);}
+.other-name{font-size:0.95rem;font-weight:400;color:var(--white);margin-bottom:0.25rem;}
+.other-role{font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue-light);}
+
+footer{background:var(--charcoal);border-top:1px solid rgba(255,255,255,0.06);padding:2.5rem 3rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;}
+.footer-logo-text{font-size:0.75rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);}
+.footer-links{display:flex;gap:1.75rem;list-style:none;}
+.footer-links a{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.25);text-decoration:none;transition:color 0.15s;}
+.footer-links a:hover{color:rgba(255,255,255,0.7);}
+.footer-copy{font-size:0.68rem;color:rgba(255,255,255,0.2);}
+
+@media(max-width:768px){
+  nav,.back-bar{padding-left:1.5rem;padding-right:1.5rem;}
+  .profile-hero{padding:4rem 1.5rem 3rem;}
+  .profile-hero-inner{grid-template-columns:1fr;gap:2rem;}
+  .profile-content{grid-template-columns:1fr;padding:3rem 1.5rem 5rem;gap:3rem;}
+  .other-grid{grid-template-columns:1fr 1fr;}
+  footer{flex-direction:column;align-items:flex-start;padding:2rem 1.5rem;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg width="44" height="28" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+      <text x="2" y="60" font-family="Inter,sans-serif" font-size="68" font-weight="700" fill="#3A7EA8">M</text>
+      <text x="42" y="60" font-family="Inter,sans-serif" font-size="68" font-weight="700" fill="#7AACCA">V</text>
+      <text x="80" y="60" font-family="Inter,sans-serif" font-size="68" font-weight="700" fill="#3A7EA8">P</text>
+    </svg>
+    <div class="nav-logo-text"><span class="name">Mendon</span><span class="sub">Venture Partners</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#philosophy">Philosophy</a></li>
+    <li><a href="index.html#focus">Focus</a></li>
+    <li><a href="index.html#portfolio">Portfolio</a></li>
+    <li><a href="reports.html">Reports</a></li>
+    <li><a href="index.html#team">Team</a></li>
+    <li><a href="index.html#contact" style="background:var(--blue);color:var(--white)!important;padding:0.45rem 1.1rem;font-size:0.75rem;font-weight:500;">Get in touch</a></li>
+  </ul>
+</nav>
+
+<!-- BACK -->
+<div class="back-bar" style="padding-top:calc(64px + 2rem);">
+  <a href="index.html#team" class="back-btn">← Back to team</a>
+</div>
+
+<!-- PROFILE HERO -->
+<div class="profile-hero" id="profile-hero">
+  <div class="profile-hero-inner">
+    <div class="profile-photo" id="profile-photo">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect width="80" height="80" fill="#1D2A3A"/><circle cx="40" cy="30" r="16" fill="#2C6089"/><ellipse cx="40" cy="72" rx="26" ry="18" fill="#2C6089"/></svg>
+    </div>
+    <div>
+      <div class="profile-label">Mendon Venture Partners</div>
+      <div class="profile-name" id="profile-name">Loading...</div>
+      <div class="profile-role" id="profile-role">Partner</div>
+      <a class="linkedin-btn" id="linkedin-btn" href="#" target="_blank">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        View on LinkedIn
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="profile-content">
+  <div>
+    <div class="profile-section">
+      <div class="profile-section-label">Bio</div>
+      <div class="placeholder-block"><p>Bio placeholder — add a full biography here.</p></div>
+    </div>
+    <div class="profile-section">
+      <div class="profile-section-label">Education</div>
+      <div class="placeholder-block"><p>Education placeholder — add degrees, institutions, and years here.</p></div>
+    </div>
+    <div class="profile-section">
+      <div class="profile-section-label">Past Work Experience</div>
+      <div class="placeholder-block"><p>Work experience placeholder — add previous roles, firms, and tenures here.</p></div>
+    </div>
+  </div>
+
+  <div class="profile-sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-card-label">Focus areas</div>
+      <p class="placeholder">Investment focus areas placeholder.</p>
+    </div>
+    <div class="sidebar-card">
+      <div class="sidebar-card-label">At Mendon since</div>
+      <p class="placeholder">Year placeholder.</p>
+    </div>
+    <div class="sidebar-card">
+      <div class="sidebar-card-label">Location</div>
+      <p>New York, NY</p>
+    </div>
+  </div>
+</div>
+
+<!-- OTHER PARTNERS -->
+<div class="other-partners">
+  <div class="other-inner">
+    <div class="other-label">Other partners</div>
+    <div class="other-grid" id="other-grid"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo-text">Mendon Venture Partners</div>
+  <ul class="footer-links">
+    <li><a href="index.html#philosophy">Philosophy</a></li>
+    <li><a href="index.html#focus">Focus</a></li>
+    <li><a href="reports.html">Reports</a></li>
+    <li><a href="index.html#team">Team</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <span class="footer-copy">&copy; 2025 Mendon Venture Partners</span>
+</footer>
+
+<script>
+const TEAM = [
+  { id: 'anton-schutz',    name: 'Anton Schutz',    role: 'Managing Partner', linkedin: 'https://www.linkedin.com/in/antonschutz' },
+  { id: 'andrew-marquardt',name: 'Andrew Marquardt', role: 'Managing Partner', linkedin: 'https://www.linkedin.com/in/andrewmarquardt' },
+  { id: 'anton-schutz-jr', name: 'Anton Schutz Jr.', role: 'Partner', linkedin: 'https://www.linkedin.com/in/antonschutzjr' },
+  { id: 'john-clausen',    name: 'John Clausen',     role: 'Founding Partner', linkedin: 'https://www.linkedin.com/in/johnclausen' },
+  { id: 'dan-goldfarb',    name: 'Dan Goldfarb',     role: 'Founding Partner', linkedin: 'https://www.linkedin.com/in/dangoldfarb' },
+];
+
+const params = new URLSearchParams(window.location.search);
+const id = params.get('id');
+const member = TEAM.find(m => m.id === id) || TEAM[0];
+
+document.getElementById('profile-name').textContent = member.name;
+document.getElementById('profile-role').textContent = member.role;
+document.getElementById('linkedin-btn').href = member.linkedin;
+document.title = member.name + ' — Mendon Venture Partners';
+
+// Other partners grid (exclude current)
+const others = TEAM.filter(m => m.id !== member.id);
+document.getElementById('other-grid').innerHTML = others.map(m => `
+  <a class="other-card" href="team-member.html?id=${m.id}">
+    <div class="other-name">${m.name}</div>
+    <div class="other-role">${m.role}</div>
+  </a>`).join('');
+</script>
+</body>
+</html>
